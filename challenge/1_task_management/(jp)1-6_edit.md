@@ -37,7 +37,7 @@ public function update(UpdateRequest $request, Task $task)
 {
     DB::transaction(fn() => $task->update($request->validated()));
 
-    return response()->redirectToRoute('tasks.index');
+    return to_route('tasks.index');
 }
 ```
 
@@ -203,14 +203,14 @@ public function complete(Task $task): RedirectResponse
 {
     DB::transaction(fn() => $task->update(['is_completed' => true]));
 
-    return response()->redirectToRoute('tasks.index');
+    return to_route('tasks.index');
 }
 
 public function yetComplete(Task $task): RedirectResponse
 {
     DB::transaction(fn() => $task->update(['is_completed' => false]));
 
-    return response()->redirectToRoute('tasks.index');
+    return to_route('tasks.index');
 }
 ```
 
@@ -262,7 +262,7 @@ public function complete(Task $task): RedirectResponse
     DB::transaction(fn() => $task->update(['is_completed' => true]));
     dd($task);
 
-    return response()->redirectToRoute('tasks.index');
+    return to_route('tasks.index');
 }
 ```
 `attributes`を展開して中を確認して見ましょう。  

@@ -57,7 +57,7 @@ public function store(StoreRequest $request)
 {
     $task = DB::transaction(fn() => Task::create($request->validated()));
 
-    return response()->redirectToRoute('tasks.index');
+    return to_route('tasks.index');
 }
 ```
 

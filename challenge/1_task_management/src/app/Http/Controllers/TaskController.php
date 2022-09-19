@@ -45,7 +45,7 @@ class TaskController extends Controller
     {
         DB::transaction(fn() => Task::create($request->validated()));
 
-        return response()->redirectToRoute('tasks.index');
+        return to_route('tasks.index');
     }
 
     /**
@@ -81,18 +81,20 @@ class TaskController extends Controller
     {
         DB::transaction(fn() => $task->update($request->validated()));
 
-        return response()->redirectToRoute('tasks.index');
+        return to_route('tasks.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Task $task
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Task $task): RedirectResponse
     {
-        //
+        DB::transaction(fn() => $task->delete());
+
+        return to_route('tasks.index');
     }
 
     /**
@@ -103,7 +105,7 @@ class TaskController extends Controller
     {
         DB::transaction(fn() => $task->update(['is_completed' => true]));
 
-        return response()->redirectToRoute('tasks.index');
+        return to_route('tasks.index');
     }
 
     /**
@@ -114,6 +116,6 @@ class TaskController extends Controller
     {
         DB::transaction(fn() => $task->update(['is_completed' => false]));
 
-        return response()->redirectToRoute('tasks.index');
+        return to_route('tasks.index');
     }
 }
