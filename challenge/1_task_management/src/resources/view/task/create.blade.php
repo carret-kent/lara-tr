@@ -24,7 +24,7 @@
     </div>
 @endif
 <section class="section">
-    <h1 class="title">Task | Create</h1>
+    <h1 class="title">Tasks | Create</h1>
     <form method="post" action="{{ route('tasks.store') }}">
         @csrf
         <div class="card">
@@ -51,22 +51,6 @@
                             <div class="control">
                                 <textarea id="description" name="description" class="textarea"
                                           placeholder="Task description"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label" for="description">Complete?</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="select">
-                                <select name="is_completed" disabled>
-                                    <option value="0">Yet</option>
-                                    <option value="1">Done</option>
-                                </select>
                             </div>
                         </div>
                     </div>

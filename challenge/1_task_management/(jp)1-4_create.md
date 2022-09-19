@@ -102,22 +102,6 @@ https://readouble.com/laravel/9.x/ja/blade.html
                     </div>
                 </div>
 
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label" for="description">Complete?</label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="select">
-                                <select name="is_completed" disabled>
-                                    <option value="0">Yet</option>
-                                    <option value="1">Done</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <footer class="card-footer">
                     <button type="submit" class="card-footer-item button">Create</button>
                 </footer>
@@ -138,7 +122,7 @@ TaskControllerに下記を追加してください。
 ```
 public function create()
 {
-    return view('task/create');
+    return view('task.create');
 }
 ```
 
@@ -199,9 +183,7 @@ Laravelでは、Eloquent経由で簡単にDB登録することができます。
 ```
 public function store(StoreRequest $request)
 {
-    $task = DB::transaction(function () use ($request) {
-        return Task::create($request->validated());
-    });
+    $task = DB::transaction(fn() => Task::create($request->validated()));
 
     return response()->json($task);
 }
